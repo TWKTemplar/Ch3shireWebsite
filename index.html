@@ -8,29 +8,6 @@
 </head>
 <body>
     <h1>Ch3shire's Art</h1>
-    <div id="gallery"></div>
-
-    <script>
-        window.onload = function () {
-            var galleryDiv = document.getElementById('gallery');
-
-            // Array of image filenames
-            var imageFilenames = ['Ch3sireTimeLapsGif.gif', 'PEWTER-4MB-SLOW.gif', 'finalpic.jpg'];
-
-            // Base URL for images in Git LFS
-            var baseUrl = 'https://github.com/TWKTemplar/Ch3shireWebsite/raw/main/images/';
-
-            // Iterate over each image filename
-            imageFilenames.forEach(function (filename) {
-                var img = document.createElement('img');
-                img.src = baseUrl + filename; // Use correct URL
-                img.alt = filename;
-                galleryDiv.appendChild(img);
-            });
-        };
-
-    </script>
-
-    <script src="script.js"></script> <!-- optional -->
+    <img src="https://github.com/TWKTemplar/Ch3shireWebsite/raw/main/images/Ch3sireTimeLapsGif.gif" alt="Ch3sire's Time-Lapse Gif">
 </body>
 </html>
