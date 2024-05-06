@@ -2,28 +2,37 @@ window.onload = function () {
     var galleryDiv = document.getElementById('gallery');
 
     fetchImages().then(function (images) {
-        console.log('Fetched images:', images); // Log fetched images
         images.forEach(function (image) {
             var img = document.createElement('img');
-            img.src = image.download_url; // Use the download_url directly
-            img.alt = image.name;
+            img.src = 'https://github.com/TWKTemplar/Ch3shireWebsite/raw/main/images/' + image;
+            img.alt = image;
             galleryDiv.appendChild(img);
         });
     }).catch(function (error) {
-        console.error('Error fetching images:', error); // Log any errors encountered
+        console.error('Error fetching images:', error);
     });
 
     function fetchImages() {
-        console.log('Fetching images...'); // Log fetching images
-        // Fetch list of images from the GitHub API
-        return fetch('https://api.github.com/repos/TWKTemplar/Ch3shireWebsite/contents/images')
-            .then(response => response.json())
+        return fetch('https://github.com/TWKTemplar/Ch3shireWebsite/raw/main/images/')
+            .then(response => response.text())
             .then(data => {
-                // Map the response to extract image URLs and names
-                return data.map(item => ({
-                    name: item.name,
-                    download_url: item.download_url // Use download URL for direct image access
-                }));
+                // Extract image filenames from the response
+                var filenames = extractFilenames(data);
+                return filenames;
             });
+    }
+
+    function extractFilenames(data) {
+        // Parse the HTML content to extract image filenames
+        var parser = new DOMParser();
+        var htmlDoc = parser.parseFromString(data, 'text/html');
+        var links = htmlDoc.querySelectorAll('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]');
+
+        var filenames = [];
+        links.forEach(function (link) {
+            var filename = link.getAttribute('href').split('/').pop(); // Get the filename from the URL
+            filenames.push(filename);
+        });
+        return filenames;
     }
 };
