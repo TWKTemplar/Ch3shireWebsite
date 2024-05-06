@@ -14,23 +14,18 @@
         window.onload = function () {
             var galleryDiv = document.getElementById('gallery');
 
-            // Fetch image filenames from the images folder
-            fetchImages().then(function (images) {
-                images.forEach(function (image) {
-                    var img = document.createElement('img');
-                    img.src = image.download_url; // Use download_url provided by GitHub API
-                    img.alt = image.name;
-                    galleryDiv.appendChild(img);
-                });
+            // Array of image filenames
+            var imageFilenames = ['Ch3sireTimeLapsGif.gif', 'PEWTER-4MB-SLOW.gif', 'finalpic.jpg'];
+
+            // Iterate over each image filename
+            imageFilenames.forEach(function (filename) {
+                var img = document.createElement('img');
+                img.src = 'https://raw.githubusercontent.com/TWKTemplar/Ch3shireWebsite/main/images/' + filename; // Use raw GitHub URL
+                img.alt = filename;
+                galleryDiv.appendChild(img);
             });
         };
 
-        // Function to fetch image filenames from the images folder
-        function fetchImages() {
-            return fetch('https://api.github.com/repos/TWKTemplar/Ch3shireWebsite/contents/images')
-                .then(response => response.json())
-                .then(data => data.filter(item => item.type === 'file'));
-        }
     </script>
 
     <script src="script.js"></script> <!-- optional -->
