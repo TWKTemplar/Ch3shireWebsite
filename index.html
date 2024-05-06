@@ -27,7 +27,7 @@
 
         // Function to fetch image filenames from the images folder
         function fetchImages() {
-            return fetch('https://api.github.com/repos/your-username/your-repo/contents/images')
+            return fetch('https://api.github.com/repos/TWKTemplar/Ch3shireWebsite/contents/images')
                 .then(response => response.json())
                 .then(data => data.filter(item => item.type === 'file'));
         }
