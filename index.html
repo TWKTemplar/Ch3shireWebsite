@@ -17,13 +17,13 @@
             // Array of image filenames
             var imageFilenames = ['Ch3sireTimeLapsGif.gif', 'PEWTER-4MB-SLOW.gif', 'finalpic.jpg'];
 
-            // Base URL of Git LFS endpoint for your repository
-            var gitLFSEndpoint = 'https://github.com/TWKTemplar/Ch3shireWebsite.git/info/lfs';
+            // Base URL for images in Git LFS
+            var baseUrl = 'https://github.com/TWKTemplar/Ch3shireWebsite/raw/main/images/';
 
             // Iterate over each image filename
             imageFilenames.forEach(function (filename) {
                 var img = document.createElement('img');
-                img.src = gitLFSEndpoint + '/' + filename; // Use Git LFS URL
+                img.src = baseUrl + filename; // Use correct URL
                 img.alt = filename;
                 galleryDiv.appendChild(img);
             });
