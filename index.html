@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Portfolio</title>
+    <link rel="stylesheet" href="styles.css"> <!-- optional -->
+</head>
+<body>
+    <h1>Ch3shire's Art</h1>
+    <div id="gallery"></div>
+
+    <script>
+        window.onload = function () {
+            var galleryDiv = document.getElementById('gallery');
+
+            // Fetch image filenames from the images folder
+            fetchImages().then(function (images) {
+                images.forEach(function (image) {
+                    var img = document.createElement('img');
+                    img.src = 'images/' + image.name;
+                    img.alt = image.name;
+                    galleryDiv.appendChild(img);
+                });
+            });
+        };
+
+        // Function to fetch image filenames from the images folder
+        function fetchImages() {
+            return fetch('https://api.github.com/repos/your-username/your-repo/contents/images')
+                .then(response => response.json())
+                .then(data => data.filter(item => item.type === 'file'));
+        }
+    </script>
+
+    <script src="script.js"></script> <!-- optional -->
+</body>
+</html>
